@@ -1,0 +1,20 @@
+.root{
+    -fx-background-size: cover;
+
+}
+.mainbox{
+    -fx-background-color: #FFFFFF ;
+    -fx-background-size: cover;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(two-pass-box,darkgrey, 30, 0, 0,0 );
+
+}
+.button{
+    -fx-background-radius: 10;
+    -fx-background-color: #86C8BC;
+    -fx-font-size: 15;
+}
+.buttonNext{
+    -fx-background-radius: 40;
+    -fx-background-color: #EF9A53;
+}
