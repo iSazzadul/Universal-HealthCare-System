@@ -1,14 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="bg" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aibrains.upms.NewDoctorController">
+   <children>
+      <AnchorPane layoutX="240.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="mainbox">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="600.0" layoutX="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainbox" width="355.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.4280376732349396" green="0.8947368264198303" blue="0.46692928671836853" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.21176470816135406" green="0.5686274766921997" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Label layoutX="110.0" layoutY="392.0" text="Let's get you set up!" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="31.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="193.0" fitWidth="246.0" layoutX="82.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/doc.png" />
+               </image></ImageView>
+            <Label layoutX="512.0" layoutY="39.0" text=" Register:">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="30.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3699733018875122" green="0.6491228342056274" blue="0.3445960581302643" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.12879033386707306" green="0.34295719861984253" blue="0.5877193212509155" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Label layoutX="119.0" layoutY="118.0" styleClass="label1" text="DOCTOR" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="392.0" layoutY="155.0" text="First Name:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="fname" layoutX="485.0" layoutY="151.0" prefHeight="25.0" prefWidth="245.0" />
+            <Label layoutX="392.0" layoutY="193.0" text="Last Name:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="lname" layoutX="485.0" layoutY="189.0" prefHeight="25.0" prefWidth="245.0" />
+            <TextField fx:id="cNo" layoutX="485.0" layoutY="335.0" prefHeight="25.0" prefWidth="245.0" />
+            <TextField fx:id="degree" layoutX="484.0" layoutY="408.0" prefHeight="25.0" prefWidth="245.0" />
+            <TextField fx:id="spec" layoutX="485.0" layoutY="443.0" prefHeight="25.0" prefWidth="245.0" />
+            <TextField fx:id="email" layoutX="485.0" layoutY="226.0" prefHeight="25.0" prefWidth="245.0" />
+            <TextField fx:id="password" layoutX="486.0" layoutY="265.0" prefHeight="25.0" prefWidth="245.0" />
+            <Label layoutX="392.0" layoutY="412.0" text="Degree:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="392.0" layoutY="447.0" text="Specialist:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="390.0" layoutY="339.0" text="Contact no:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="392.0" layoutY="231.0" text="Email:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="392.0" layoutY="269.0" text="Password:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="signup" layoutX="630.0" layoutY="487.0" mnemonicParsing="false" onAction="#signup" prefHeight="31.0" prefWidth="102.0" text="Sign Up">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Text fill="WHITE" layoutX="18.0" layoutY="448.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label" text="It should take only a couple of minutes to create an account" textAlignment="CENTER" wrappingWidth="317.09765625">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Label layoutX="392.0" layoutY="304.0" text="NID">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="did" layoutX="486.0" layoutY="300.0" prefHeight="25.0" prefWidth="245.0" />
+            <Label layoutX="392.0" layoutY="376.0" text="Gender">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="gender" layoutX="484.0" layoutY="372.0" prefWidth="150.0" />
+            <Label fx:id="log" layoutX="367.0" layoutY="491.0" prefHeight="90.0" prefWidth="235.0" textFill="#fc0000" wrapText="true">
+               <font>
+                  <Font size="9.0" />
+               </font></Label>
+            <Button fx:id="signup1" layoutX="634.0" layoutY="536.0" mnemonicParsing="false" onAction="#back" prefHeight="31.0" prefWidth="102.0" text="Back">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
