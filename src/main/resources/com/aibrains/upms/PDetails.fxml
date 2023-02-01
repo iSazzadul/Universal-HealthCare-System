@@ -10,17 +10,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #e4eaf2;" styleClass="bg" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aibrains.upms.PatientDetailsController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #e4eaf2;" styleClass="bg" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aibrains.upms.PDetailsController">
    <children>
       <AnchorPane layoutX="17.0" layoutY="26.0" prefHeight="338.0" prefWidth="322.0" style="-fx-background-color: #ffffff;" styleClass="mainbox" stylesheets="@style.css">
          <children>
             <ImageView fx:id="photo" fitHeight="150.0" fitWidth="200.0" layoutX="61.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" styleClass="image" />
             <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="205.0" prefHeight="38.0" prefWidth="270.0" textAlignment="CENTER" wrapText="true" />
-            <Text fill="#0481c2" layoutX="108.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient">
-               <font>
-                  <Font name="System Bold" size="38.0" />
-               </font>
-            </Text>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="349.0" layoutY="26.0" prefHeight="338.0" prefWidth="483.0" style="-fx-background-color: #ffffff;" styleClass="mainbox" stylesheets="@style.css">
@@ -45,12 +40,12 @@
             <Text layoutX="359.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NID" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="845.0" layoutY="146.0" prefHeight="317.0" prefWidth="418.0" style="-fx-background-color: #ffffff;" styleClass="mainbox" stylesheets="@style.css">
+      <AnchorPane layoutX="842.0" layoutY="73.0" prefHeight="390.0" prefWidth="417.0" style="-fx-background-color: #ffffff;" styleClass="mainbox" stylesheets="@style.css">
          <children>
-            <ListView fx:id="pList" layoutX="11.0" layoutY="43.0" opacity="0.86" prefHeight="198.0" prefWidth="390.0" style="-fx-background-color: #e4e6eb;" styleClass="root" stylesheets="@style.css" />
-            <TextField fx:id="comment" layoutX="11.0" layoutY="253.0" prefHeight="52.0" prefWidth="290.0" promptText="Details" style="-fx-background-color: #e4e6eb;" styleClass="root" stylesheets="@style.css" />
-            <Button fx:id="addButton" layoutX="308.0" layoutY="253.0" mnemonicParsing="false" onAction="#add" prefHeight="51.0" prefWidth="98.0" stylesheets="@style.css" text="Upload" wrapText="true" />
-            <Label layoutX="11.0" layoutY="14.0" text="Patient Medical History">
+            <ListView fx:id="pList" layoutX="13.0" layoutY="40.0" opacity="0.86" prefHeight="251.0" prefWidth="390.0" style="-fx-background-color: #e4e6eb;" styleClass="root" stylesheets="@style.css" />
+            <TextField fx:id="comment" layoutX="13.0" layoutY="300.0" prefHeight="78.0" prefWidth="290.0" promptText="Details" style="-fx-background-color: #e4e6eb;" styleClass="root" stylesheets="@style.css" />
+            <Button fx:id="addButton" layoutX="310.0" layoutY="304.0" mnemonicParsing="false" onAction="#add" prefHeight="70.0" prefWidth="98.0" stylesheets="@style.css" text="Upload" wrapText="true" />
+            <Label layoutX="13.0" layoutY="10.0" text="Patient Medical History">
                <font>
                   <Font name="Comic Sans MS Bold Italic" size="15.0" />
                </font>
@@ -92,15 +87,7 @@
             </AnchorPane>
          </children></AnchorPane>
       <TextField fx:id="PID" layoutX="842.0" layoutY="26.0" prefHeight="38.0" prefWidth="328.0" styleClass="root" stylesheets="@style.css" />
-      <Button fx:id="find" layoutX="1181.0" layoutY="26.0" mnemonicParsing="false" onAction="#search" prefHeight="38.0" prefWidth="77.0" stylesheets="@style.css" text="Search" />
+      <Button fx:id="find" layoutX="1181.0" layoutY="26.0" mnemonicParsing="false" onAction="#find" prefHeight="38.0" prefWidth="77.0" stylesheets="@style.css" text="Search" />
       <Label fx:id="error" layoutX="846.0" layoutY="3.0" prefHeight="16.0" prefWidth="416.0" textFill="#e70000" />
-      <TextField fx:id="otp" accessibleRole="PASSWORD_FIELD" layoutX="842.0" layoutY="75.0" prefHeight="38.0" prefWidth="128.0" styleClass="root" stylesheets="@style.css" />
-      <Button fx:id="otpcheck" layoutX="983.0" layoutY="75.0" mnemonicParsing="false" onAction="#otpcheck" prefHeight="38.0" prefWidth="138.0" stylesheets="@style.css" text="Verify OTP" />
-      <Button fx:id="emg" layoutX="1131.0" layoutY="75.0" mnemonicParsing="false" onAction="#emg" prefHeight="38.0" prefWidth="128.0" stylesheets="@style.css" text="Emergency" />
-      <Label fx:id="finderror" alignment="CENTER" contentDisplay="CENTER" layoutX="850.0" layoutY="120.0" prefHeight="22.0" prefWidth="416.0" textFill="RED">
-         <font>
-            <Font name="Arial Black" size="12.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

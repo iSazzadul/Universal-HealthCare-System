@@ -3,6 +3,7 @@ package com.aibrains.upms;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ import java.sql.Statement;
 public class LoginMainController extends Functions{
 
     public TextField loginID;
-    public TextField password;
+    public PasswordField password;
     public Label connres;
     public static int type;
     public static String uid;
@@ -45,15 +46,15 @@ public class LoginMainController extends Functions{
                     if(Type.equals("user")){
                         type = 1;
                         uid = loginID.getText();
-                        openWindow(event,"pp.fxml");
+                        openScreen(event,"PDetails.fxml");
                     }else if(Type.equals("Doctor")){
                         type = 2;
                         uid = loginID.getText();
-                        openWindow(event,"DoctorDashboard.fxml");
+                        openScreen(event,"DoctorDashboard.fxml");
                     }else if(Type.equals("Admin")) {
                         type = 3;
                         uid = loginID.getText();
-                        openWindow(event, "AdminDashboard.fxml");
+                        openScreen(event, "AdminDashboard.fxml");
                     }
                 }else {
                     connres.setText("Incorrect Username or Password !");

@@ -10,12 +10,14 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.*;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 
@@ -52,115 +54,118 @@ public class PatientDetailsController extends Functions implements Initializable
     public Label allergymedi;
     public TextField newallergymedi;
     public Label error;
+    public TextField otp;
+    public Button otpcheck;
+    public Button emg;
+    public Label finderror;
+    public  int emgvalue;
 
 
     @FXML
-        public void find() {
-            medilist.setText("");
-            allergymedi.setText("");
-            id = PID.getText();
-            findID = id ;
-            pList.getItems().clear();
-            reportlist.getItems().clear();
+    public void find() {
+        id = PID.getText();
+        findID = id ;
+        pList.getItems().clear();
+        reportlist.getItems().clear();
 
-            try {
+        try {
 
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("test.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("test.fxml"));
 
-                DbConnect connectDB = new DbConnect();
-                Connection connection = connectDB.getConnect();
+            DbConnect connectDB = new DbConnect();
+            Connection connection = connectDB.getConnect();
 
-                String connectQueryLog = "SELECT * FROM patient_log WHERE PID = " + id;
-                Statement statement = connection.createStatement();
-                ResultSet queryOutput = statement.executeQuery(connectQueryLog);
-                while (queryOutput.next()) {
-                    medilist.setText(queryOutput.getString("medlist"));
-                    newmedicine.setText(queryOutput.getString("medlist"));
-                    allergymedi.setText(queryOutput.getString("MediAllergy"));
-                    newallergymedi.setText(queryOutput.getString("MediAllergy"));
+            String connectQueryLog = "SELECT * FROM patient_log WHERE PID = " + id;
+            Statement statement = connection.createStatement();
+            ResultSet queryOutput = statement.executeQuery(connectQueryLog);
+            while (queryOutput.next()) {
+                medilist.setText(queryOutput.getString("medlist"));
+                newmedicine.setText(queryOutput.getString("medlist"));
+                allergymedi.setText(queryOutput.getString("MediAllergy"));
+                newallergymedi.setText(queryOutput.getString("MediAllergy"));
 
 
 
-                    String PID = queryOutput.getString("PID");
-                    String Date = queryOutput.getString("Date");
-                    String DoctorName = queryOutput.getString("DoctorName");
-                    String Comment = queryOutput.getString("Comment");
-                    String Reportinfo = queryOutput.getString("ReportInfo");
-                    int SL = queryOutput.getInt("sl");
-                    pList.getItems().add(Date + "\n" + DoctorName + "\n" + Comment + "\n");
-                    reportlist.getItems().add((" " +SL + " -> "+Date + "\t" + Reportinfo));
+                String PID = queryOutput.getString("PID");
+                String Date = queryOutput.getString("Date");
+                String DoctorName = queryOutput.getString("DoctorName");
+                String Comment = queryOutput.getString("Comment");
+                String Reportinfo = queryOutput.getString("ReportInfo");
+                int SL = queryOutput.getInt("sl");
+                pList.getItems().add(Date + "\n" + DoctorName + "\n" + Comment + "\n");
+                reportlist.getItems().add((" " +SL + " -> "+Date + "\t" + Reportinfo));
 
-                }
-
-
-                String connectQueryPatient = "SELECT * FROM patient WHERE PID = " + id;
-                statement = connection.createStatement();
-                queryOutput = statement.executeQuery(connectQueryPatient);
-                while ((queryOutput.next())) {
-                    name.setText(queryOutput.getString("FirstName") + " " + queryOutput.getString("LastName"));
-                    // lastname.setText(queryOutput.getString("LastName"));
-                    address.setText(queryOutput.getString("Adress"));
-                    dob.setText(queryOutput.getString("DOB"));
-                    blood.setText(queryOutput.getString("BloodGroup"));
-                    emergency.setText(queryOutput.getString("Econtact"));
-                    email.setText(queryOutput.getString("email"));
-                    number.setText(queryOutput.getString("phone"));
-                    pid.setText(queryOutput.getString("PID"));
-                    gender.setText(queryOutput.getString("gender"));
-                }
-
-                String connectQueryPhoto = "SELECT * FROM patient WHERE PID = " + id;
-                statement = connection.createStatement();
-                queryOutput = statement.executeQuery(connectQueryPhoto);
-                if (queryOutput.next()) {
-                    Blob blob = queryOutput.getBlob("ProfileImage");
-                    InputStream inputStream = blob.getBinaryStream();
-                    Image image = new Image(inputStream);
-                    photo.setImage(image);
-                }
-
-
-            } catch (SQLException e) {
-               // throw new RuntimeException(e);
             }
+
+
+            String connectQueryPatient = "SELECT * FROM patient WHERE PID = " + id;
+            statement = connection.createStatement();
+            queryOutput = statement.executeQuery(connectQueryPatient);
+            while ((queryOutput.next())) {
+                name.setText(queryOutput.getString("FirstName") + " " + queryOutput.getString("LastName"));
+                // lastname.setText(queryOutput.getString("LastName"));
+                address.setText(queryOutput.getString("Adress"));
+                dob.setText(queryOutput.getString("DOB"));
+                blood.setText(queryOutput.getString("BloodGroup"));
+                emergency.setText(queryOutput.getString("Econtact"));
+                email.setText(queryOutput.getString("email"));
+                number.setText(queryOutput.getString("phone"));
+                pid.setText(queryOutput.getString("PID"));
+                gender.setText(queryOutput.getString("gender"));
+            }
+
+            String connectQueryPhoto = "SELECT * FROM patient WHERE PID = " + id;
+            statement = connection.createStatement();
+            queryOutput = statement.executeQuery(connectQueryPhoto);
+            if (queryOutput.next()) {
+                Blob blob = queryOutput.getBlob("ProfileImage");
+                InputStream inputStream = blob.getBinaryStream();
+                Image image = new Image(inputStream);
+                photo.setImage(image);
+            }
+
+
+        } catch (SQLException e) {
+            // throw new RuntimeException(e);
+        }
     }
 
-        public void add() throws SQLException, IOException {
+    public void add() throws SQLException, IOException {
         if(comment.getText()=="" || reportinfo.getText()==""){
-             error.setText("Please Fill every Data");
+            error.setText("Please Fill every Data");
         }else {
             addtoDB();
         }
     }
 
-        public void addtoDB() throws SQLException, IOException {
-            String Comment = comment.getText();
-            String DocName = "Labib Rahman";
-            String Date = String.valueOf(java.time.LocalDate.now());
-            String ReportInfo = reportinfo.getText();
-            int isCure = 0;
+    public void addtoDB() throws SQLException, IOException {
+        String Comment = comment.getText();
+        String DocName = "Labib Rahman";
+        String Date = String.valueOf(java.time.LocalDate.now());
+        String ReportInfo = reportinfo.getText();
+        int isCure = 0;
 
 
-            String query = "INSERT INTO `patient_log` (`PID`, `Date`, `DoctorName`, `Comment`,`Report`, `ReportInfo`) VALUES ( ?,?, ?, ?, ?, ?);";
+        String query = "INSERT INTO `patient_log` (`PID`, `Date`, `DoctorName`, `Comment`,`Report`, `ReportInfo`) VALUES ( ?,?, ?, ?, ?, ?);";
 
-            DbConnect connectDB = new DbConnect();
-            Connection connection = connectDB.getConnect();
-            PreparedStatement ps = connection.prepareStatement(query);
+        DbConnect connectDB = new DbConnect();
+        Connection connection = connectDB.getConnect();
+        PreparedStatement ps = connection.prepareStatement(query);
 
-            FileChooser fileChooser = new FileChooser();
-            File file = fileChooser.showOpenDialog(addButton.getScene().getWindow());
-            FileInputStream fileInputStream = new FileInputStream(file);
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(addButton.getScene().getWindow());
+        FileInputStream fileInputStream = new FileInputStream(file);
 
-            ps.setBigDecimal(1, BigDecimal.valueOf(Long.parseLong(id)));
-            ps.setString(2, Date);
-            ps.setString(3, DoctorDashboardController.docname);
-            ps.setString(4, Comment);
-            ps.setString(6, ReportInfo);
-            ps.setBinaryStream(5, fileInputStream, fileInputStream.available());
-            ps.execute();
-            find();
-        }
+        ps.setBigDecimal(1, BigDecimal.valueOf(Long.parseLong(id)));
+        ps.setString(2, Date);
+        ps.setString(3, DoctorDashboardController.docname);
+        ps.setString(4, Comment);
+        ps.setString(6, ReportInfo);
+        ps.setBinaryStream(5, fileInputStream, fileInputStream.available());
+        ps.execute();
+        find();
+    }
 
     public void view(ActionEvent event) throws IOException {
         String rep =reportlist.getSelectionModel().getSelectedItems().toString();
@@ -216,9 +221,44 @@ public class PatientDetailsController extends Functions implements Initializable
         }
         id = LoginMainController.uid;
         PID.setText(id);
-        find();
+        // find();
+
     }
 
 
+    public void search() throws SQLException {
+        id = PID.getText();
+        DbConnect connectDB = new DbConnect();
+        Connection connection = connectDB.getConnect();
+        String connectQueryPatientEmg = "SELECT * FROM patient WHERE PID = " + id;
+        Statement st = connection.createStatement();
+        ResultSet emgquery = st.executeQuery(connectQueryPatientEmg);
+        while ((emgquery.next())) {
+            emgvalue = emgquery.getInt("emg");
+        }
+    }
+
+    public void otpcheck() {
+        if(otp.getText().equals("sazzad")){
+            find();
+        }else {
+            finderror.setText("You are not allowed to view details");
+        }
+    }
+
+    public void emg() throws SQLException {
+        search();
+        id = PID.getText();
+        if(emgvalue==0) {
+            String query = "UPDATE `patient` SET `emg`='" + 1 + "' WHERE PID=" + id;
+            DbConnect connectDB = new DbConnect();
+            Connection connection = connectDB.getConnect();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.execute();
+            find();
+        }else {
+            finderror.setText("Emergency view already used");
+        }
+    }
 }
 
